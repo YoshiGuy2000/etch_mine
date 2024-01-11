@@ -17,4 +17,21 @@ function makeGrid(size) {
     }
 }
 
+function selectSize() {
+    let size = prompt("Please enter the size of box you would like from 1 to 100: ")
+    if (size == "") {
+        document.querySelector("#error").textContent = "You did not choose a size!"
+    }
+
+    else if (size < 1 || size > 100) {
+        document.querySelector("#error").textContent = "Your choice was out of bounds!"
+    }
+
+    else {
+        document.querySelector("#error").textContent = "The grid is set!"
+        makeGrid(size)
+    }
+
+}
+
 makeGrid(16)
