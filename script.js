@@ -1,4 +1,7 @@
 const container = document.querySelector("#board")
+let color = "random"
+let click = false
+
 
 function makeGrid(size) {
     console.log("This works")
@@ -9,9 +12,8 @@ function makeGrid(size) {
 
     for (let c = 0; c < numDivs; c++) {
         let cell = document.createElement("div")
-        cell.addEventListener("mouseover", (event) => {
-            event.target.style.backgroundColor = "black";
-        })
+        cell.classList.add("board_boxes")
+        cell.addEventListener("mouseover", chooseColors)
         container.insertAdjacentElement("beforeend", cell)
 
     }
@@ -29,9 +31,30 @@ function selectSize() {
 
     else {
         document.querySelector("#error").textContent = "The grid is set!"
+        resetColors()
         makeGrid(size)
     }
 
+}
+
+function chooseColors() {
+    if (color == "random") {
+        this.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`
+    }
+
+    else {
+        this.style.backgroundColor = "black"
+    }
+}
+
+
+function resetColors() {
+    let divs = document.querySelectorAll(".board_boxes")
+    divs.forEach((div) => div.style.backgroundColor = "white")
+}
+
+function setColor(colorChoice) {
+    color = colorChoice
 }
 
 makeGrid(16)
